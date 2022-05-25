@@ -1,5 +1,7 @@
 package com.rm.personregister.service;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.rm.personregister.client.TestClient;
 import com.rm.personregister.data.dto.PersonDTO;
 import com.rm.personregister.data.dto.Return;
 import com.rm.personregister.data.entity.Person;
@@ -21,14 +23,16 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class PersonService {
-
+    private static final String NOT_FOUND_MESSAGE = "Not found";
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
+    private final TestClient client;
 //    private final KafkaTemplate template;
-    private final String NOT_FOUND_MESSAGE = "Not found";
+
     private Return ret;
 
     public ResponseEntity<Object> getAllPerson(Pageable pageable) {
+        ObjectNode poke = client.pokeIntegration();
         Page<PersonDTO> people = personRepository.findAll(pageable).map(personMapper::domainToResponse);
 
         return ResponseEntity.status(HttpStatus.OK)

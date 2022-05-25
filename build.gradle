@@ -34,6 +34,7 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:1.4.2.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.4.2.Final")
 	implementation("javax.persistence:javax.persistence-api:2.2")
+	implementation("com.google.guava:guava:30.0-jre")
 }
 
 tasks.named('test') {
