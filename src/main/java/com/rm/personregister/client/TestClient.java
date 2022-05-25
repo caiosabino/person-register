@@ -16,11 +16,12 @@ import java.util.Optional;
 @Component
 public class TestClient {
     CacheStore<ObjectNode> cache;
-    
-    public ObjectNode pokeIntegration() {
-        ObjectNode cachedPokemonReturn = Optional.of(cache.get("poke")).orElse(null);
 
-        if(Objects.nonNull(cachedPokemonReturn)){
+    public ObjectNode pokeIntegration() {
+        ObjectNode cachedPokemonReturn = Optional.of(cache.get("poke"))
+                                                 .orElse(null);
+
+        if (Objects.nonNull(cachedPokemonReturn)) {
             return cachedPokemonReturn;
         }
         WebClient client = WebClient.builder()
@@ -33,10 +34,10 @@ public class TestClient {
                                     .retrieve()
                                     .bodyToMono(ObjectNode.class)
                                     .block();
-        
+
         cache.add("poke", response);
         log.info("gravou no cache");
-        
+
         return response;
     }
 }
