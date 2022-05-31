@@ -19,22 +19,22 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("junit:junit:4.12")
-	compileOnly("org.projectlombok:lombok")
-	annotationProcessor("org.projectlombok:lombok")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation('org.springframework.boot:spring-boot-starter-web:2.6.7')
+	developmentOnly('org.springframework.boot:spring-boot-devtools:2.6.7')
+	testImplementation('org.springframework.boot:spring-boot-starter-test:2.6.7')
+	implementation('junit:junit:4.13.2')
+	compileOnly('org.projectlombok:lombok:1.18.24')
+	annotationProcessor('org.projectlombok:lombok:1.18.24')
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.6.7')
 	runtimeOnly("com.h2database:h2:2.1.212")
 
 	implementation("org.apache.kafka:kafka-clients:3.2.0")
-	implementation("org.springframework:spring-webflux:5.3.20")
+	implementation('org.springframework.boot:spring-boot-starter-webflux:2.6.7')
 	implementation("org.springframework.data:spring-data-jpa:2.7.0")
 	implementation("org.mapstruct:mapstruct:1.4.2.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.4.2.Final")
 	implementation("javax.persistence:javax.persistence-api:2.2")
-	implementation("com.google.guava:guava:30.0-jre")
+	implementation('com.google.guava:guava:31.1-jre')
 }
 
 tasks.named('test') {

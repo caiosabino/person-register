@@ -4,22 +4,23 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.rm.personregister.config.cache.CacheStore;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Objects;
-import java.util.Optional;
+
 
 @Slf4j
 @Component
 public class TestClient {
+    @Autowired
     CacheStore<ObjectNode> cache;
 
     public ObjectNode pokeIntegration() {
-        ObjectNode cachedPokemonReturn = Optional.of(cache.get("poke"))
-                                                 .orElse(null);
+        ObjectNode cachedPokemonReturn = cache.get("poke");
 
         if (Objects.nonNull(cachedPokemonReturn)) {
             return cachedPokemonReturn;
@@ -36,7 +37,6 @@ public class TestClient {
                                     .block();
 
         cache.add("poke", response);
-        log.info("gravou no cache");
 
         return response;
     }
