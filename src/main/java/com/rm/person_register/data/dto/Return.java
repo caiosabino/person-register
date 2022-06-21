@@ -1,4 +1,4 @@
-package com.rm.personregister.data.dto;
+package com.rm.person_register.data.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,28 +9,22 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
-@Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(builderClassName = "PersonDtoBuilder", toBuilder = true)
-@JsonDeserialize(builder = PersonDTO.PersonDtoBuilder.class)
+@Builder(builderClassName = "ReturnBuilder", toBuilder = true)
+@JsonDeserialize(builder = Return.ReturnBuilder.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PersonDTO {
-    public Long id;
+public class Return {
+    public String status;
 
-    public Long document;
-
-    public String name;
-
-    public LocalDateTime timestampGet;
+    public String message;
 
     @JsonPOJOBuilder(withPrefix = "")
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class PersonDtoBuilder {
+    public static class ReturnBuilder {
 
     }
 }

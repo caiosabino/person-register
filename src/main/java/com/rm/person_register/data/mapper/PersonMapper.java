@@ -1,7 +1,7 @@
-package com.rm.personregister.data.mapper;
+package com.rm.person_register.data.mapper;
 
-import com.rm.personregister.data.dto.PersonDTO;
-import com.rm.personregister.data.entity.Person;
+import com.rm.person_register.data.dto.PersonDTO;
+import com.rm.person_register.data.entity.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

@@ -1,52 +1,41 @@
-package com.rm.personregister;
+package com.rm.person_register;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rm.personregister.data.dto.PersonDTO;
-import com.rm.personregister.data.entity.Person;
-import com.rm.personregister.data.mapper.PersonMapper;
-import com.rm.personregister.data.repository.PersonRepository;
-import com.rm.personregister.service.PersonService;
-import org.junit.Test;
+import com.rm.person_register.data.dto.PersonDTO;
+import com.rm.person_register.data.entity.Person;
+import com.rm.person_register.data.mapper.PersonMapper;
+import com.rm.person_register.data.repository.PersonRepository;
+import com.rm.person_register.service.PersonService;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
-//import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest(classes = PersonService.class)
-public class PersonServiceTest {
-    @InjectMocks
+class PersonServiceTest {
+    @Autowired
     private PersonService personService;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Mock
+    @MockBean
     private PersonRepository personRepository;
 
-    @Mock
+    @MockBean
     private PersonMapper personMapper;
 
-    @Mock
+    @MockBean
     private Pageable pageableMock;
 
-//    @Mock
+//    @MockBean
 //    private KafkaTemplate template;
 
 //    @Test
@@ -61,7 +50,7 @@ public class PersonServiceTest {
     @Test
     public void getPersonByIdTest() {
         when(personRepository.findById(anyLong())).thenReturn(Optional.of(personMock()));
-        when(personMapper.domainToResponse((Person) any())).thenReturn(personDTOMock());
+        when(personMapper.domainToResponse(any())).thenReturn(personDTOMock());
 
         personService.getPersonById(1L);
     }
@@ -74,7 +63,7 @@ public class PersonServiceTest {
     @Test
     public void getPersonByDocumentTest() {
         when(personRepository.findByDocument(anyLong())).thenReturn(Optional.of(personMock()));
-        when(personMapper.domainToResponse((Person) any())).thenReturn(personDTOMock());
+        when(personMapper.domainToResponse(any())).thenReturn(personDTOMock());
 
         personService.getPersonByDocument(1L);
     }
@@ -86,13 +75,7 @@ public class PersonServiceTest {
 
     @Test
     public void insertPersonTest() {
-//        when(template.send(anyString(), anyString())).thenAnswer(new Answer<Object>() {
-//            @Override
-//            public Object answer(InvocationOnMock invocation) throws Throwable {
-//                return null;
-//            }
-//        });
-        when(personMapper.domainToResponse((Person) any())).thenReturn(personDTOMock());
+        when(personMapper.domainToResponse(any())).thenReturn(personDTOMock());
 
         personService.insertPerson(personMock());
     }

@@ -1,12 +1,13 @@
-package com.rm.personregister.service;
+package com.rm.person_register.service;
+
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.rm.personregister.client.TestClient;
-import com.rm.personregister.data.dto.PersonDTO;
-import com.rm.personregister.data.dto.Return;
-import com.rm.personregister.data.entity.Person;
-import com.rm.personregister.data.mapper.PersonMapper;
-import com.rm.personregister.data.repository.PersonRepository;
+import com.rm.person_register.client.Client;
+import com.rm.person_register.data.dto.PersonDTO;
+import com.rm.person_register.data.dto.Return;
+import com.rm.person_register.data.entity.Person;
+import com.rm.person_register.data.mapper.PersonMapper;
+import com.rm.person_register.data.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,7 +27,7 @@ public class PersonService {
     private static final String NOT_FOUND_MESSAGE = "Not found";
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
-    private final TestClient client;
+    private final Client client;
 //    private final KafkaTemplate template;
 
     private Return ret;

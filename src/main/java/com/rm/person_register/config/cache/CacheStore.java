@@ -1,4 +1,4 @@
-package com.rm.personregister.config.cache;
+package com.rm.person_register.config.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

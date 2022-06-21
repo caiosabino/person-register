@@ -1,13 +1,12 @@
-package com.rm.personregister.controller;
+package com.rm.person_register.controller;
 
-import com.rm.personregister.data.entity.Person;
-import com.rm.personregister.service.PersonService;
+import com.rm.person_register.data.entity.Person;
+import com.rm.person_register.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

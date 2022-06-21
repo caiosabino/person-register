@@ -1,10 +1,10 @@
-package com.rm.personregister.client;
+package com.rm.person_register.client;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.rm.personregister.config.cache.CacheStore;
+import com.rm.person_register.config.cache.CacheStore;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -12,12 +12,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Objects;
 
-
 @Slf4j
+@AllArgsConstructor
 @Component
-public class TestClient {
-    @Autowired
-    CacheStore<ObjectNode> cache;
+public class Client {
+    private final CacheStore<ObjectNode> cache;
 
     public ObjectNode pokeIntegration() {
         ObjectNode cachedPokemonReturn = cache.get("poke");

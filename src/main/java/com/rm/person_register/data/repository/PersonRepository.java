@@ -1,6 +1,6 @@
-package com.rm.personregister.data.repository;
+package com.rm.person_register.data.repository;
 
-import com.rm.personregister.data.entity.Person;
+import com.rm.person_register.data.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,5 @@
-package com.rm.personregister.config.cache;
+package com.rm.person_register.config.cache;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 public class CacheStoreBean {
 
     @Bean
-    public CacheStore<ObjectNode> pokemonCache() {
-        return new CacheStore<ObjectNode>(10, TimeUnit.SECONDS);
+    public CacheStore pokemonCache() {
+        return new CacheStore (10, TimeUnit.SECONDS);
     }
 
 }

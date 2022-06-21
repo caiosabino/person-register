@@ -1,4 +1,4 @@
-package com.rm.personregister.data.entity;
+package com.rm.person_register.data.entity;
 
 import lombok.Getter;
 import lombok.Setter;
