@@ -1,5 +1,6 @@
 package com.rm.person_register;
 
+import com.rm.person_register.client.Client;
 import com.rm.person_register.data.dto.PersonDTO;
 import com.rm.person_register.data.entity.Person;
 import com.rm.person_register.data.mapper.PersonMapper;
@@ -18,25 +19,17 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PersonService.class)
+
 class PersonServiceTest {
-    @Autowired
-    private PersonService personService;
+    private PersonRepository personRepository = mock(PersonRepository.class);
+    private PersonMapper personMapper = mock(PersonMapper.class);
+    private Client client = mock(Client.class);
 
-    @MockBean
-    private PersonRepository personRepository;
-
-    @MockBean
-    private PersonMapper personMapper;
-
-    @MockBean
-    private Pageable pageableMock;
-
-//    @MockBean
-//    private KafkaTemplate template;
+    private PersonService personService = new PersonService(personRepository, personMapper, client);
 
 //    @Test
 //    public void getAllPersonTest() {
