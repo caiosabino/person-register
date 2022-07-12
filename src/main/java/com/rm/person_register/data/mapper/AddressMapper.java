@@ -1,15 +1,15 @@
 package com.rm.person_register.data.mapper;
 
-import com.rm.person_register.data.dto.request.PersonDTO;
-import com.rm.person_register.data.entity.Person;
+import com.rm.person_register.data.dto.request.AddressDTO;
+import com.rm.person_register.data.entity.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 import java.time.LocalDateTime;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = LocalDateTime.class)
-public interface PersonMapper {
-    Person responseToDomain(PersonDTO personDTO);
+public interface AddressMapper {
+    Address responseToDomain(AddressDTO addressDTO);
 
-    PersonDTO domainToResponse(Person person);
+    AddressDTO domainToResponse(Address address);
 }

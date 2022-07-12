@@ -9,6 +9,6 @@ EXPOSE 8080
 
 RUN mkdir /app
 
-COPY --from=build /home/gradle/src/build/libs/person.jar /app/person-register-1.0-SNAPSHOT.jar
+COPY --from=build /home/gradle/src/build/libs/person-register-0.0.1-SNAPSHOT.jar /app/person-register-SNAPSHOT.jar
 
-ENTRYPOINT ["java","-jar","/app/Authorizing-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/app/person-register-SNAPSHOT.jar"]

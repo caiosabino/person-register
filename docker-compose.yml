@@ -1,14 +1,5 @@
 version: '3'
 services:
-  postgres:
-    image: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=TB_PERSON
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-
   zookeeper:
     image: wurstmeister/zookeeper
 

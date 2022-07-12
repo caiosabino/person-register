@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -20,23 +18,28 @@ import java.util.Date;
 @Setter
 @Entity
 @ToString
-@Table(name = "person")
-public class Person {
+@Table(name = "address")
+public class Address {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(unique = true, nullable = false)
-	private Long document;
+	@Column
+	private String street;
 
 	@Column
-	private String name;
+	private String neighborhood;
 
-	@ManyToOne
-	@JoinColumn(name = "address_id")
-	private Address address;
+	@Column
+	private String city;
+
+	@Column
+	private String number;
+
+	@Column
+	private String complement;
 
 	@Column
 	private Date createdAt;
