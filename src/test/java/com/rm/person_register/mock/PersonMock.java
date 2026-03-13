@@ -2,6 +2,7 @@ package com.rm.person_register.mock;
 
 import com.rm.person_register.data.entity.Person;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PersonMock {
@@ -14,10 +15,7 @@ public class PersonMock {
         person.setDocumentType("CPF");
         person.setEmail("vendedor@teste.com");
         person.setPhone("11999998888");
-        person.setTradeName("Loja Teste");
-        person.setStateRegistration("123456789");
-        person.setBusinessCategory("Eletronicos");
-        person.setBirthDate(new Date());
+        person.setBirthDate(LocalDate.now());
         person.setCreatedAt(new Date());
         person.setAddress(AddressMock.mock());
 

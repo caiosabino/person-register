@@ -10,7 +10,7 @@ import static org.mockito.Mockito.mock;
 
 class RabbitMqServiceTest {
     private final RabbitTemplate rabbitTemplate = mock(RabbitTemplate.class);
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     private final RabbitMqService rabbitMqService = new RabbitMqService(rabbitTemplate, objectMapper);
 

@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -42,16 +43,7 @@ public class Person {
     private String phone;
 
     @Column
-    private String tradeName;
-
-    @Column
-    private String stateRegistration;
-
-    @Column
-    private String businessCategory;
-
-    @Column
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @ManyToOne
     @JoinColumn(name = "address_id")

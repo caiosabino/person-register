@@ -2,7 +2,7 @@ package com.rm.person_register.mock;
 
 import com.rm.person_register.data.dto.request.PersonDTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PersonDTOMock {
     public static PersonDTO mock() {
@@ -12,10 +12,7 @@ public class PersonDTOMock {
                         .documentType("CPF")
                         .email("vendedor@teste.com")
                         .phone("11999998888")
-                        .tradeName("Loja Teste")
-                        .stateRegistration("123456789")
-                        .businessCategory("Eletronicos")
-                        .birthDate(new Date())
+                        .birthDate(LocalDate.now())
                         .build();
     }
 }

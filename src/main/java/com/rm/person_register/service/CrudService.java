@@ -86,9 +86,6 @@ public class CrudService {
         person.setDocumentType(request.getPerson().getDocumentType());
         person.setEmail(request.getPerson().getEmail());
         person.setPhone(request.getPerson().getPhone());
-        person.setTradeName(request.getPerson().getTradeName());
-        person.setStateRegistration(request.getPerson().getStateRegistration());
-        person.setBusinessCategory(request.getPerson().getBusinessCategory());
         person.setBirthDate(request.getPerson().getBirthDate());
 
         if (Objects.nonNull(request.getAddress())) {

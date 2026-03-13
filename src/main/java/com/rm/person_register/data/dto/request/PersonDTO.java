@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -29,11 +29,5 @@ public class PersonDTO {
 
     private String phone;
 
-    private String tradeName;
-
-    private String stateRegistration;
-
-    private String businessCategory;
-
-    private Date birthDate;
+    private LocalDate birthDate;
 }
