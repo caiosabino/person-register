@@ -1,12 +1,13 @@
 package com.rm.person_register.data.dto.request;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -21,4 +22,18 @@ public class PersonDTO {
 
     @NonNull
     private String name;
+
+    private String documentType;
+
+    private String email;
+
+    private String phone;
+
+    private String tradeName;
+
+    private String stateRegistration;
+
+    private String businessCategory;
+
+    private Date birthDate;
 }

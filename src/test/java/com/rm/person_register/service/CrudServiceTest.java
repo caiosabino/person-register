@@ -12,41 +12,33 @@ import com.rm.person_register.mock.PersonMock;
 import com.rm.person_register.mock.PersonRepresentationMock;
 import com.rm.person_register.mock.RequestMock;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Objects;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
 class CrudServiceTest {
-    private PersonService personService = mock(PersonService.class);
-    private AddressService addressService = mock(AddressService.class);
-    private PersonMapper personMapper = mock(PersonMapper.class);
-    private AddressMapper addressMapper = mock(AddressMapper.class);
-    private PersonRepresentationMapper personRepresentationMapper = mock(PersonRepresentationMapper.class);
-    private Client client = mock(Client.class);
+    private final PersonService personService = mock(PersonService.class);
+    private final AddressService addressService = mock(AddressService.class);
+    private final PersonMapper personMapper = mock(PersonMapper.class);
+    private final AddressMapper addressMapper = mock(AddressMapper.class);
+    private final PersonRepresentationMapper personRepresentationMapper = mock(PersonRepresentationMapper.class);
+    private final Client client = mock(Client.class);
 
-    private CrudService crudService = new CrudService(personService, addressService, personMapper, addressMapper, personRepresentationMapper, client);
-
-    //    @Test
-    //    public void getAllPersonTest() {
-    //        Pageable pageable = PageRequest.of(0, 1);
-    //        when(personRepository.findAll((Pageable) any())).thenReturn((Page<Person>) pageableMock);
-    //        when(personMapper.domainToResponse(any())).thenReturn(personDTOMock());
-    //
-    //        personService.getAllPerson(pageable);
-    //    }
+    private final CrudService crudService = new CrudService(personService, addressService, personMapper, addressMapper, personRepresentationMapper, client);
 
     @Test
-    public void getPersonByIdTest() {
+    void getPersonByIdTest() {
         when(personService.findById(anyLong())).thenReturn(Optional.of(PersonMock.mock()));
         when(personRepresentationMapper.toRepresentation(any(), any())).thenReturn(PersonRepresentationMock.mock());
 
@@ -54,12 +46,12 @@ class CrudServiceTest {
     }
 
     @Test
-    public void getPersonByIdNullTest() {
+    void getPersonByIdNullTest() {
         assertThrows(DataNotFoundException.class, () -> crudService.getPersonById(1L));
     }
 
     @Test
-    public void getPersonByDocumentTest() {
+    void getPersonByDocumentTest() {
         when(personService.findByDocument(anyLong())).thenReturn(Optional.of(PersonMock.mock()));
         when(personRepresentationMapper.toRepresentation(any(), any())).thenReturn(PersonRepresentationMock.mock());
 
@@ -67,12 +59,12 @@ class CrudServiceTest {
     }
 
     @Test
-    public void getPersonByDocumentNullTest() {
+    void getPersonByDocumentNullTest() {
         assertThrows(DataNotFoundException.class, () -> crudService.getPersonByDocument(1L));
     }
 
     @Test
-    public void insertPersonTest() throws JsonProcessingException {
+    void insertPersonTest() throws JsonProcessingException {
         when(personMapper.responseToDomain(any())).thenReturn(PersonMock.mock());
         when(addressMapper.responseToDomain(any())).thenReturn(AddressMock.mock());
         when(personRepresentationMapper.toRepresentation(any(), any())).thenReturn(PersonRepresentationMock.mock());
@@ -84,11 +76,11 @@ class CrudServiceTest {
 
         Person value = captor.getValue();
 
-        assertTrue(value.getId().equals(PersonMock.mock().getId()));
+        assertNull(value.getId());
     }
 
     @Test
-    public void insertPersonAlreadyExistsTest() {
+    void insertPersonAlreadyExistsTest() {
         when(personMapper.responseToDomain(any())).thenReturn(PersonMock.mock());
         when(personService.findByDocument(any())).thenReturn(Optional.of(PersonMock.mock()));
 
@@ -96,10 +88,10 @@ class CrudServiceTest {
     }
 
     @Test
-    public void deletePersonTest() {
+    void deletePersonTest() {
         when(personService.findByDocument(anyLong())).thenReturn(Optional.of(PersonMock.mock()));
 
-        crudService.deletePerson(1l);
+        crudService.deletePerson(1L);
 
         ArgumentCaptor<Person> captor = ArgumentCaptor.forClass(Person.class);
         verify(personService).delete(captor.capture());
@@ -110,12 +102,12 @@ class CrudServiceTest {
     }
 
     @Test
-    public void deletePersonNullTest() {
-        assertThrows(DataNotFoundException.class, () -> crudService.deletePerson(1l));
+    void deletePersonNullTest() {
+        assertThrows(DataNotFoundException.class, () -> crudService.deletePerson(1L));
     }
 
     @Test
-    public void putPersonTest() throws JsonProcessingException {
+    void putPersonTest() throws JsonProcessingException {
         when(personService.findByDocument(anyLong())).thenReturn(Optional.of(PersonMock.mock()));
         when(addressMapper.responseToDomain(any())).thenReturn(AddressMock.mock());
 
@@ -130,7 +122,7 @@ class CrudServiceTest {
     }
 
     @Test
-    public void putPersonWithoutAddressInfoTest() throws JsonProcessingException {
+    void putPersonWithoutAddressInfoTest() throws JsonProcessingException {
         when(personService.findByDocument(anyLong())).thenReturn(Optional.of(PersonMock.mock()));
 
         crudService.putPerson(RequestMock.mockWithoutAddressInfo());
@@ -144,19 +136,7 @@ class CrudServiceTest {
     }
 
     @Test
-    public void putPersonNotInDataBaseTest() {
+    void putPersonNotInDataBaseTest() {
         assertThrows(DataNotFoundException.class, () -> crudService.putPerson(RequestMock.mock()));
     }
-
-    //    	private List<Person> buildPersonResponseList(String responseFilePath) throws IOException {
-    //		Resource personResponse = resourceLoader.getResource("classpath:" + responseFilePath);
-    //
-    //		return objectMapper.readValue(personResponse.getInputStream(), List<Person>.class);
-    //	}
-
-    //	private Person buildPersonResponse(String responseFilePath) throws IOException {
-    //		Resource personResponse = resourceLoader.getResource("classpath:" + responseFilePath);
-    //
-    //		return objectMapper.readValue(personResponse.getInputStream(), Person.class);
-    //	}
 }

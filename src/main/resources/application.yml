@@ -1,32 +1,17 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    passsword:
+  profiles:
+    default: local
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
-    defer-datasource-initialization: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      client-id: 1
-      group-id: group-id
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      # Desliga o commit automático no Cliente Kafka
-      enable-auto-commit: false
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
 
-kafka:
-  topics:
-    person-register: person-register-topic
-    
-#logging:
-#  level:
-#    root: DEBUG
+rabbitmq:
+  queues:
+    person-register: person-register-queue
+  listener:
+    person-register:
+      enabled: ${RABBITMQ_LISTENER_PERSON_REGISTER_ENABLED:true}

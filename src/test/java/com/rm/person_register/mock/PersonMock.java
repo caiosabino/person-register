@@ -11,6 +11,13 @@ public class PersonMock {
         person.setId(1L);
         person.setDocument(123L);
         person.setName("teste");
+        person.setDocumentType("CPF");
+        person.setEmail("vendedor@teste.com");
+        person.setPhone("11999998888");
+        person.setTradeName("Loja Teste");
+        person.setStateRegistration("123456789");
+        person.setBusinessCategory("Eletronicos");
+        person.setBirthDate(new Date());
         person.setCreatedAt(new Date());
         person.setAddress(AddressMock.mock());
 

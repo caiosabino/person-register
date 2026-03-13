@@ -55,8 +55,9 @@ public class CrudService {
         return personRepresentation;
     }
 
-    public void insertPerson(Request request) throws JsonProcessingException {
+    public void  insertPerson(Request request) throws JsonProcessingException {
         Person person = personMapper.responseToDomain(request.getPerson());
+        person.setId(null);
 
         if (personService.findByDocument(request.getPerson()
                                                 .getDocument())
@@ -81,8 +82,14 @@ public class CrudService {
                                                             .getDocument())
                                      .orElseThrow(() -> new DataNotFoundException(DATA_NOT_FOUND_MESSAGE));
 
-        person.setName(request.getPerson()
-                              .getName());
+        person.setName(request.getPerson().getName());
+        person.setDocumentType(request.getPerson().getDocumentType());
+        person.setEmail(request.getPerson().getEmail());
+        person.setPhone(request.getPerson().getPhone());
+        person.setTradeName(request.getPerson().getTradeName());
+        person.setStateRegistration(request.getPerson().getStateRegistration());
+        person.setBusinessCategory(request.getPerson().getBusinessCategory());
+        person.setBirthDate(request.getPerson().getBirthDate());
 
         if (Objects.nonNull(request.getAddress())) {
             person.setAddress(addressService.updateAddressInDb(request.getPerson(), request.getAddress()));

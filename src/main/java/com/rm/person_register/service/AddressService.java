@@ -25,6 +25,7 @@ public class AddressService {
 
     protected Address addAddressInDb(AddressDTO addressDto) {
         Address address = addressMapper.responseToDomain(addressDto);
+        address.setId(null);
         address.setCreatedAt(new Date());
         return addressRepository.save(address);
     }

@@ -1,13 +1,18 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.0'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'org.springframework.boot' version '3.4.3'
+	id 'io.spring.dependency-management' version '1.1.7'
 	id 'java'
 	id 'jacoco'
 }
 
 group = 'com.rm'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
 
 configurations {
 	compileOnly {
@@ -20,46 +25,37 @@ repositories {
 }
 
 dependencies {
-	implementation('org.springframework.boot:spring-boot-starter-web:2.7.0')
-	developmentOnly('org.springframework.boot:spring-boot-devtools:2.7.0')
-	implementation('junit:junit:4.13.2')
-	compileOnly('org.projectlombok:lombok:1.18.24')
-	annotationProcessor('org.projectlombok:lombok:1.18.24')
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.0')
-	runtimeOnly('com.h2database:h2:2.1.212')
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
 
-	implementation("org.apache.kafka:kafka-clients:3.2.0")
-	implementation("org.springframework.kafka:spring-kafka:2.8.7")
-	implementation('org.springframework.boot:spring-boot-starter-webflux:2.7.0')
-	implementation('org.springframework.data:spring-data-jpa:2.7.0')
-	implementation('org.mapstruct:mapstruct:1.5.1.Final')
-	annotationProcessor('org.mapstruct:mapstruct-processor:1.5.1.Final')
-	implementation('javax.persistence:javax.persistence-api:2.2')
-	implementation('com.google.guava:guava:31.1-jre')
-	implementation("com.google.code.gson:gson:2.9.0")
+	compileOnly 'org.projectlombok:lombok:1.18.36'
+	annotationProcessor 'org.projectlombok:lombok:1.18.36'
 
-	//test
-	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.0')
-	testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.2')
-	testImplementation('org.junit.jupiter:junit-jupiter-engine:5.8.2')
+	implementation 'org.mapstruct:mapstruct:1.6.3'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+	implementation 'com.google.guava:guava:33.4.0-jre'
+	implementation 'com.google.code.gson:gson:2.12.1'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'com.h2database:h2'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-test {
+tasks.named('test') {
 	useJUnitPlatform()
 }
 
 jacoco {
-	toolVersion = "0.8.7"
+	toolVersion = '0.8.12'
 }
 
 jacocoTestReport {
 	reports {
-		xml.enabled true
-		html.enabled false
-	}
-	afterEvaluate {
-		classDirectories.setFrom(files(classDirectories.files.collect {
-			fileTree(dir: it, exclude: [])
-		}))
+		xml.required = true
+		html.required = false
 	}
 }

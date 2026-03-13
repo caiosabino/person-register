@@ -9,23 +9,20 @@ import com.rm.person_register.mock.AddressMock;
 import com.rm.person_register.mock.PersonDTOMock;
 import com.rm.person_register.mock.PersonMock;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
 class AddressServiceTest {
     private final PersonRepository personRepository = mock(PersonRepository.class);
     private final AddressRepository addressRepository = mock(AddressRepository.class);
     private final AddressMapper addressMapper = mock(AddressMapper.class);
 
-    private AddressService addressService = new AddressService(personRepository, addressRepository, addressMapper);
+    private final AddressService addressService = new AddressService(personRepository, addressRepository, addressMapper);
 
 
     @Test

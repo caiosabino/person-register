@@ -1,19 +1,17 @@
 package com.rm.person_register.data.entity;
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.util.Date;
 
 @Getter
@@ -22,25 +20,46 @@ import java.util.Date;
 @ToString
 @Table(name = "person")
 public class Person {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@Column(unique = true, nullable = false)
-	private Long document;
+    @Column(unique = true, nullable = false)
+    private Long document;
 
-	@Column
-	private String name;
+    @Column(nullable = false)
+    private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "address_id")
-	private Address address;
+    @Column
+    private String documentType;
 
-	@Column
-	private Date createdAt;
+    @Column
+    private String email;
 
-	@Column
-	private Date updatedAt;
+    @Column
+    private String phone;
+
+    @Column
+    private String tradeName;
+
+    @Column
+    private String stateRegistration;
+
+    @Column
+    private String businessCategory;
+
+    @Column
+    private Date birthDate;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @Column
+    private Date createdAt;
+
+    @Column
+    private Date updatedAt;
 }

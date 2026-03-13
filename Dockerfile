@@ -1,14 +1,19 @@
-FROM gradle:6-jdk11-alpine AS build
-COPY --chown=gradle:gradle . /home/gradle/src
+FROM amazoncorretto:21 AS build
 WORKDIR /home/gradle/src
-RUN gradle build --no-daemon
 
-FROM adoptopenjdk/openjdk11
+COPY gradlew gradlew
+COPY gradle gradle
+COPY settings.gradle build.gradle ./
+COPY src src
+
+RUN chmod +x ./gradlew
+RUN ./gradlew clean bootJar --no-daemon
+
+FROM amazoncorretto:21
+WORKDIR /app
 
 EXPOSE 8080
 
-RUN mkdir /app
+COPY --from=build /home/gradle/src/build/libs/person-register-0.0.1-SNAPSHOT.jar /app/person-register.jar
 
-COPY --from=build /home/gradle/src/build/libs/person-register-0.0.1-SNAPSHOT.jar /app/person-register-SNAPSHOT.jar
-
-ENTRYPOINT ["java","-jar","/app/person-register-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/app/person-register.jar"]
