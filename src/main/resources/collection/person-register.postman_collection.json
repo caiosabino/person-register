@@ -150,6 +150,40 @@
           ]
         }
       }
+    },
+    {
+      "name": "POST - Consumir Mensagem RabbitMQ",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/api/rabbitmq/consume",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "rabbitmq",
+            "consume"
+          ]
+        }
+      }
+    },
+    {
+      "name": "POST - Peek Mensagem RabbitMQ",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/api/rabbitmq/peek",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "rabbitmq",
+            "peek"
+          ]
+        }
+      }
     }
   ]
 }

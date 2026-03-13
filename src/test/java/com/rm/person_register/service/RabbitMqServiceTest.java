@@ -18,9 +18,4 @@ class RabbitMqServiceTest {
     void sendToQueueTest() throws JsonProcessingException {
         rabbitMqService.sendToQueue("teste", PersonMock.mock());
     }
-
-    @Test
-    void consumePersonRegisterTest() {
-        rabbitMqService.consumePersonRegister("teste");
-    }
 }

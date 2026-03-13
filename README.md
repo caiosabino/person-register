@@ -74,6 +74,9 @@ Base URL: `http://localhost:8080/api/person`
 - `PUT /api/person`
 - `DELETE /api/person/document/{document}`
 
+RabbitMQ (consumo manual):
+- `POST /api/rabbitmq/consume` (consome 1 mensagem da fila `person-register-queue`)
+
 ## Exemplo de POST (curl)
 ```bash
 curl --location 'http://localhost:8080/api/person' \
@@ -95,6 +98,11 @@ curl --location 'http://localhost:8080/api/person' \
       "complement": "Apto 101"
     }
   }'
+```
+
+## Exemplo de consumo da fila (curl)
+```bash
+curl --location --request POST 'http://localhost:8080/api/rabbitmq/consume'
 ```
 
 ## Collection Postman
