@@ -28,6 +28,18 @@ Servicos:
 - RabbitMQ Management: `http://localhost:15672`
 - Postgres: `localhost:5432`
 
+## Acessar RabbitMQ localmente
+Com os containers `rabbitmq` e `app` no ar:
+
+- Management UI: `http://localhost:15672`
+- Usuario: `guest`
+- Senha: `guest`
+- Vhost: `/`
+
+Portas locais:
+- AMQP (aplicacao): `localhost:5672`
+- Management UI: `localhost:15672`
+
 ## Rodar local
 Suba apenas dependencias:
 ```bash
